@@ -1,0 +1,12 @@
+_build/
+_checkouts/
+.rebar3/
+*.beam
+erl_crash.dump
+rebar3.crashdump
+.DS_Store
+target/
+priv/*.so
+priv/*.dylib
+logs/
+output/

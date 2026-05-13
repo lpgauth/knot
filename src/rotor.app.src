@@ -1,0 +1,19 @@
+{application, rotor, [
+  {description, "Fast non-cryptographic PRNG NIF (wyrand, C)"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications, [kernel, stdlib]},
+  {env, []},
+  {modules, []},
+  {licenses, ["MIT"]},
+  {links, [{"GitHub", "https://github.com/lpgauth/rotor"}]},
+  {files, [
+    "src",
+    "c_src",
+    "rebar.config",
+    "rebar.lock",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ]}
+]}.
