@@ -6,31 +6,32 @@ on:
   pull_request:
 
 jobs:
-  test:
-    runs-on: ${{ matrix.os }}
+  linux:
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, macos-14]
         otp: ['25', '26', '27', '28']
-        exclude:
-          - os: macos-14
-            otp: '25'
-          - os: macos-14
-            otp: '26'
+    container:
+      image: erlang:${{ matrix.otp }}
+    steps:
+      - uses: actions/checkout@v5
+      - run: rebar3 compile
+      - run: rebar3 ct
+      - run: rebar3 xref
+      - run: rebar3 dialyzer
+
+  macos:
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+      matrix:
+        otp: ['27', '28']
     steps:
       - uses: actions/checkout@v5
       - uses: erlef/setup-beam@v1
         with:
           otp-version: ${{ matrix.otp }}
-          rebar3-version: '3.27'
-      - name: Cache rebar3
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/rebar3
-            _build
-          key: ${{ runner.os }}-otp${{ matrix.otp }}-${{ hashFiles('**/rebar.lock', 'c_src/*.c', 'c_src/build.sh') }}
       - run: rebar3 compile
       - run: rebar3 ct
       - run: rebar3 xref
