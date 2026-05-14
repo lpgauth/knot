@@ -22,7 +22,7 @@ jobs:
             _build
           key: ${{ runner.os }}-bench-${{ hashFiles('**/rebar.lock', 'c_src/*.c') }}
 
-      - name: Bench (rand vs granderl vs rotor)
+      - name: Bench (rand vs granderl vs knot)
         run: make bench | tee bench-results.txt
 
       - uses: actions/upload-artifact@v4
@@ -41,5 +41,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '## rotor bench results\n\n```\n' + out + '\n```'
+              body: '## knot bench results\n\n```\n' + out + '\n```'
             });

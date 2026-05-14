@@ -1,4 +1,4 @@
--module(rotor_bench).
+-module(knot_bench).
 
 -compile([nowarn_missing_spec, nowarn_missing_spec_all]).
 
@@ -13,13 +13,13 @@
 %% The arg is the call expression itself, evaluated N times.
 
 run() ->
-    _ = application:ensure_all_started(rotor),
+    _ = application:ensure_all_started(knot),
     _ = application:ensure_all_started(granderl),
     io:format("~n=== microbench (single proc, ~p iter, median of ~p runs) ===~n",
               [?N_MICRO, ?N_RUNS]),
     micro_run("rand:uniform/1",     fun() -> rand:uniform(?BOUND) end),
     micro_run("granderl:uniform/1", fun() -> granderl:uniform(?BOUND) end),
-    micro_run("rotor:uniform/1",    fun() -> rotor:uniform(?BOUND) end),
+    micro_run("knot:uniform/1",    fun() -> knot:uniform(?BOUND) end),
     io:format("~n=== concurrent bench (~p iter total, median of ~p runs) ===~n",
               [?N_MICRO, ?N_RUNS]),
     [run_concurrent(C) || C <- ?CONCURRENCIES],
@@ -29,7 +29,7 @@ run_concurrent(Concurrency) ->
     io:format("~n-- concurrency=~p --~n", [Concurrency]),
     concurrent_run("rand",     Concurrency, fun() -> rand:uniform(?BOUND) end),
     concurrent_run("granderl", Concurrency, fun() -> granderl:uniform(?BOUND) end),
-    concurrent_run("rotor",    Concurrency, fun() -> rotor:uniform(?BOUND) end),
+    concurrent_run("knot",    Concurrency, fun() -> knot:uniform(?BOUND) end),
     ok.
 
 %%--- microbench: median over N_RUNS ---------------------------------------

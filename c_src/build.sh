@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #
-# Build rotor's NIF.
+# Build knot's NIF.
 #
 # Honors:
 #   ERTS_INCLUDE_DIR : path to erl_nif.h (default: derived from `erl`)
 #   CC               : compiler (default: cc)
 #   CFLAGS           : extra compile flags appended after defaults
-#   ROTOR_NO_NATIVE  : if set, skip -march=native (use for portable builds)
+#   KNOT_NO_NATIVE  : if set, skip -march=native (use for portable builds)
 #
 # Sources the ERTS include dir via `erl -noshell -eval ... -s init stop`
 # with the **correct option order** — `-eval` comes *before* `-s init stop`
@@ -23,11 +23,11 @@ if [ -z "${ERTS_INCLUDE_DIR:-}" ]; then
 fi
 
 CC=${CC:-cc}
-TARGET=priv/rotor.so
-SRC=c_src/rotor.c
+TARGET=priv/knot.so
+SRC=c_src/knot.c
 
 BASE_CFLAGS="-fPIC -O3 -std=gnu11 -Wall -Wextra -Wno-missing-field-initializers"
-if [ -z "${ROTOR_NO_NATIVE:-}" ]; then
+if [ -z "${KNOT_NO_NATIVE:-}" ]; then
     BASE_CFLAGS="$BASE_CFLAGS -march=native -mtune=native"
 fi
 

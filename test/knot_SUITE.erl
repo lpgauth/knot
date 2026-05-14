@@ -1,4 +1,4 @@
--module(rotor_SUITE).
+-module(knot_SUITE).
 
 -compile([export_all, nowarn_export_all, nowarn_missing_spec, nowarn_missing_spec_all]).
 
@@ -14,7 +14,7 @@ all() ->
     ].
 
 init_per_suite(Config) ->
-    {ok, _} = application:ensure_all_started(rotor),
+    {ok, _} = application:ensure_all_started(knot),
     Config.
 
 end_per_suite(_Config) ->
@@ -23,21 +23,21 @@ end_per_suite(_Config) ->
 uniform_one_returns_one(_) ->
     %% N=1 always returns 1.
     true = lists:all(fun(X) -> X =:= 1 end,
-                     [rotor:uniform(1) || _ <- lists:seq(1, 10_000)]).
+                     [knot:uniform(1) || _ <- lists:seq(1, 10_000)]).
 
 uniform_range_invariant(_) ->
     %% For each N, all 100k draws must lie in [1, N].
     lists:foreach(
       fun(N) ->
           true = lists:all(fun(X) -> X >= 1 andalso X =< N end,
-                           [rotor:uniform(N) || _ <- lists:seq(1, 100_000)])
+                           [knot:uniform(N) || _ <- lists:seq(1, 100_000)])
       end,
       [2, 16, 254, 65535, 16#FFFFFFFF]).
 
 uniform_max_u32(_) ->
     %% Exercise the upper bound of the u32 range.
     Max = 16#FFFFFFFF,
-    Samples = [rotor:uniform(Max) || _ <- lists:seq(1, 10_000)],
+    Samples = [knot:uniform(Max) || _ <- lists:seq(1, 10_000)],
     true = lists:all(fun(X) -> X >= 1 andalso X =< Max end, Samples).
 
 distribution_chi_square(_) ->
@@ -45,11 +45,11 @@ distribution_chi_square(_) ->
     Buckets = 100,
     N       = 1_000_000,
     Expected = N / Buckets,
-    Counters = ets:new(rotor_dist, [public]),
+    Counters = ets:new(knot_dist, [public]),
     [ets:insert(Counters, {I, 0}) || I <- lists:seq(1, Buckets)],
     lists:foreach(
       fun(_) ->
-          R = rotor:uniform(Buckets),
+          R = knot:uniform(Buckets),
           ets:update_counter(Counters, R, 1)
       end,
       lists:seq(1, N)),
@@ -71,7 +71,7 @@ cross_thread_independence(_) ->
     Parent = self(),
     N = 16,
     [spawn_link(fun() ->
-                    Seq = [rotor:uniform(16#FFFFFFFF) || _ <- lists:seq(1, 10_000)],
+                    Seq = [knot:uniform(16#FFFFFFFF) || _ <- lists:seq(1, 10_000)],
                     Parent ! {self(), Seq}
                 end) || _ <- lists:seq(1, N)],
     Seqs = [receive {_, Seq} -> Seq end || _ <- lists:seq(1, N)],

@@ -9,4 +9,4 @@ exec erl \
   -pa _build/bench/lib/*/ebin \
   -pa _build/bench/lib/*/test \
   +K true +scl false +spp true \
-  -eval 'rotor_bench:run(), init:stop().'
+  -eval 'knot_bench:run(), init:stop().'

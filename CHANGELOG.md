@@ -4,7 +4,7 @@
 
 Initial release.
 
-- `rotor:uniform/1` — fast non-cryptographic PRNG NIF, drop-in
+- `knot:uniform/1` — fast non-cryptographic PRNG NIF, drop-in
   replacement for `granderl:uniform/1`. Uses wyrand (1 multiply +
   1 xor + 1 add per draw, BigCrush-passing) with the biased
   multiply-and-shift bounded method (single multiply, no rejection

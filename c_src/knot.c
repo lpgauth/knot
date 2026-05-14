@@ -1,5 +1,5 @@
 /*
- * rotor — fast non-cryptographic PRNG NIF.
+ * knot — fast non-cryptographic PRNG NIF.
  *
  * Algorithm: wyrand (1 multiply + 1 xor + 1 add per draw; passes BigCrush).
  * Bounded output: biased multiply-and-shift (single multiply, no rejection
@@ -78,4 +78,4 @@ static ErlNifFunc nif_functions[] = {
     {"uniform", 1, uniform_nif, 0},
 };
 
-ERL_NIF_INIT(rotor, nif_functions, NULL, NULL, NULL, NULL)
+ERL_NIF_INIT(knot, nif_functions, NULL, NULL, NULL, NULL)

@@ -1,4 +1,4 @@
-{application, rotor, [
+{application, knot, [
   {description, "Fast non-cryptographic PRNG NIF (wyrand, C)"},
   {vsn, "0.1.0"},
   {registered, []},
@@ -6,7 +6,7 @@
   {env, []},
   {modules, []},
   {licenses, ["MIT"]},
-  {links, [{"GitHub", "https://github.com/lpgauth/rotor"}]},
+  {links, [{"GitHub", "https://github.com/lpgauth/knot"}]},
   {files, [
     "src",
     "c_src",
