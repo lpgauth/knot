@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.1.1
+
+### Changed
+
+- `knot:uniform/1` spec tightened from `pos_integer() -> pos_integer()`
+  to `1..4294967295 -> 1..4294967295`. The NIF's C-side argument is
+  `enif_get_uint` (unsigned 32-bit), so values above `2^32 - 1` raise
+  `badarg`. The previous spec lied — dialyzer now catches the
+  out-of-range cases at compile time.
+
+- Module and function docstrings (`@doc`) added — algorithm,
+  per-thread state, lazy seeding, the bounded-output bias bound, and
+  the `badarg` semantics for over-range inputs are now in the
+  generated hexdocs without having to read `c_src/knot.c`.
+
+No behavioural changes; no new code paths.
+
 ## 0.1.0
 
 Initial release.
