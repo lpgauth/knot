@@ -3,7 +3,7 @@
 %% Drop-in replacement for `granderl:uniform/1'. Per-OS-thread state via
 %% `__thread', lazy-seeded from `getrandom'/`arc4random_buf' on first
 %% use. Biased multiply-and-shift bounded output -- single multiply,
-%% no rejection branch (modulo bias < 1e-7 for bounds <= 256, invisible
+%% no rejection branch (modulo bias under 1e-7 for bounds up to 256, invisible
 %% at typical workload scale).
 %%
 %% Use {@link knot:uniform/1} to draw a uniformly distributed integer
