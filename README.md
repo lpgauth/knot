@@ -69,8 +69,6 @@ Concurrent: knot scales linearly across schedulers because state is
 strictly per-OS-thread (`__thread uint64_t`), no atomics or locks
 anywhere on the hot path.
 
-Reproduce: `make bench`.
-
 ## License
 
 MIT.
