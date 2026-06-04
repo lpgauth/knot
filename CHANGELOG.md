@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.2
+
+### Removed
+
+- Bench tooling: the `bench` Makefile target, `bin/bench.sh`, the
+  `knot_bench` test module, the `bench` rebar profile (granderl and
+  timing git deps) and the bench CI workflow.
+
+No behavioural changes; no new code paths.
+
 ## 0.1.1
 
 ### Changed

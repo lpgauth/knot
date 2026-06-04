@@ -1,6 +1,6 @@
 {application, knot, [
   {description, "Fast non-cryptographic PRNG NIF (wyrand, C)"},
-  {vsn, "0.1.1"},
+  {vsn, "0.1.2"},
   {registered, []},
   {applications, [kernel, stdlib]},
   {env, []},
