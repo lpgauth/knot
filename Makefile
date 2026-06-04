@@ -1,4 +1,4 @@
-.PHONY: all compile test ct bench dialyzer xref clean
+.PHONY: all compile test ct dialyzer xref clean
 
 all: compile
 
@@ -9,10 +9,6 @@ test: ct
 
 ct:
 	rebar3 ct
-
-bench:
-	rebar3 as bench compile
-	./bin/bench.sh
 
 dialyzer:
 	rebar3 dialyzer
